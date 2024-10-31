@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: managedidentity
+  name: managedidentity
+  namespace: managedidentity
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: managedidentity
+  template:
+    metadata:
+      labels:
+        app: managedidentity
+        azure.workload.identity/use: "true"
+    spec:
+      serviceAccountName: cluster-workload-user
+      imagePullSecrets:
+      - name: binarydad
+      containers:
+      - image: registry.binarydad.com/managedidentity:latest
+        name: managedidentity
+        ports:
+        - containerPort: 8080
+        resources: {}

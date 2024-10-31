@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: <docker-registry-login>
+kind: Secret
+metadata:
+  name: binarydad
+  namespace: managedidentity
+type: kubernetes.io/dockerconfigjson
